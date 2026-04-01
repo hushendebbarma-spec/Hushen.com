@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>System Alert</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: black;
+      color: red;
+      font-family: monospace;
+      text-align: center;
+      margin: 0;
+      overflow: hidden;
+    }
+    .container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+    }
+    .hidden { display: none; }
+
+    /* flashing effect */
+    @keyframes flash {
+      0% { background: black; }
+      50% { background: #200; }
+      100% { background: black; }
+    }
+    .flash {
+      animation: flash 0.5s infinite;
+    }
+
+    h1 { font-size: 28px; }
+    p { font-size: 16px; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1 id="hack">⚠️ YOUR PHONE IS HACKED by hushen ⚠️</h1>
+  <p id="number"></p>
+  <p id="camera">📷 Camera Access: ENABLED</p>
+  <p id="location">📍 Location Tracking: ACTIVE</p>
+
+  <h1 id="fool" class="hidden">😂 APRIL FOOL 😂</h1>
+</div>
+
+<script>
+  // fake number
+  let num = "+91 " + Math.floor(9000000000 + Math.random() * 1000000000);
+  document.getElementById("number").innerText = "Data sent to: " + num;
+
+  // vibration (mobile only)
+  if (navigator.vibrate) {
+    navigator.vibrate([300, 200, 300, 200, 500]);
+  }
+
+  // flashing screen
+  document.body.classList.add("flash");
+
+  // after 6 sec -> reveal
+  setTimeout(() => {
+    document.getElementById("hack").classList.add("hidden");
+    document.getElementById("number").classList.add("hidden");
+    document.getElementById("camera").classList.add("hidden");
+    document.getElementById("location").classList.add("hidden");
+
+    document.getElementById("fool").classList.remove("hidden");
+    document.body.classList.remove("flash");
+    document.body.style.background = "black";
+    document.body.style.color = "white";
+  }, 6000);
+</script>
+
+</body>
+</html>
